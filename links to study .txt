@@ -1,0 +1,12 @@
+						"الموقع الرسمى لارفيل "
+
+* https://laravel.com/      
+####################################################################################
+						 " عشان ادخل على مشروع لارفيل "
+
+* open vs code proggram- open termenal in vscode by " ctrl + ذ "- and write "php artisan ser"   
+1- open wamp الايقونة الخضراا اللى تحت 
+2- open browser -> write in url -> *(localhost/path of project/public)  or *(write localhost:8000)
+	or *(take link in terminal copy and put in url)
+####################################################################################
+

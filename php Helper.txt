@@ -1,0 +1,97 @@
+					          " Filter int with use flags"   
+
+$int = 77;
+
+   if (filter_var($int, FILTER_VALIDATE_INT, FILTER_NULL_ON_FAILURE) === (filter_var($int, FILTER_VALIDATE_INT, ["flags" => FILTER_NULL_ON_FAILURE, "options" => ["min_range" => 50, "max_range" => 100]]))) {
+      echo $int;
+    } 
+else {
+    echo "no result";
+     }
+
+
+######################################################################################################################
+						" Nested loop function  "
+ 
+for ($i = 1    ;$i <= 12;     $i++) {
+     for ($j = 1; $j <= 12; $j++) {
+
+         echo $i . "*" . $j . "= " . ($i * $j) . "</br>";
+
+######################################################################################################################
+
+ 						" small project for session"
+
+* page 1 * -> (login.php)
+
+session_start();
+$employee = ["ramy@gmail.com", "eslam@gmail.com"];
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST["email"];
+    if (in_array($email, $employee)) {
+        $_SESSION["email"] = $email;
+        header("Location:first_page.php");
+    } else {
+
+        echo "Email Not found";
+    }
+}
+?>
+
+<html>
+
+<body>
+    <form action="" method="post">
+        <label for=""> email</label>
+        <input type="text" name="email">
+        <button type="submit">login </button>
+    </form>
+</body>
+
+</html>
+
+	-------------------------------------- 
+
+* page 2 * -> (first_page.php)
+<?php
+
+session_start();
+
+if (isset($_SESSION["email"])) {
+    echo $_SESSION["email"];
+} else {
+    header("Location:login.php");
+}
+
+echo "<br>";
+?>
+
+<a href="./second_page.php"> second page</a>
+	-------------------------------------- 
+* page 3 * -> (second_page.php)
+
+<?php
+
+session_start();
+
+echo $_SESSION["email"];
+echo "<br>";
+
+?>
+
+<a href="./logout.php"> logout</a>
+	-------------------------------------- 
+* page 4 * -> (logout.php)
+
+<?php
+
+session_start();
+
+session_unset();
+
+session_destroy();
+header("Location:login.php");
+
+######################################################################################################################

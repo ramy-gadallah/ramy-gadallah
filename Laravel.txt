@@ -1,0 +1,119 @@
+					   * how to creat new project in laravel *
+
+* composer create-project laravel/laravel projectname
+---------------------------------------------------------------------------------------------------------
+					   * decumantion laravel*
+* https://laravel.com/      
+---------------------------------------------------------------------------------------------------------
+						 " عشان ادخل على مشروع لارفيل "
+
+1- open my local server (wamp)
+2- open vs code proggram- open termenal in vscode by " ctrl + ذ "- and write "php artisan ser (or) serve"    
+3- open browser -> write in url -> *(localhost/path of project/public)  or *(write localhost:8000)
+	or *(take link in terminal copy and put in url)
+---------------------------------------------------------------------------------------------------------
+						  * عشان اعمل كريت يعنى اعمل انسيرت ف الداتا بيز ادخل داتا من فورم تسمع ف الداتا بيز *
+ 
+* اولا كل تيبول لازم يبقى ليه موديل ف اول لما بعمل انشاء للتيبول عن طريق 
+- php artisan make:migration create_posts_table
+* اروح اعمل موديل عن طريق 
+- php artisan make:model ModelName (posts)
+* او انى اعمل انشاء للمايجريشن اللى هيا التيبول والموديل مع بعض عن طريق 
+-  php artisan make:model posts-m
+--------------------------------------------------------------
+
+
+* (create.blade.php) -> view  *
+
+<form method="post" action="{{ route('posts.store دى معناها لما اضغط سابميت يودينى عالروت ده ') }}" class="mt-5">
+        @csrf دى مهمة جدا طول منا  شغال ف الفورم 
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Title</label>
+            <input name="title" لازم احط الاسم بتاع الانبوت  type="text" class="form-control" id="exampleFormControlInput1">
+        </div>
+
+
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Description</label>
+            <textarea name="description" لازم احط الاسم بتاع الانبوت class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Post Creator</label>
+            <select name="Post_Creator" class="form-control" id="exampleFormControlInput1">
+                <option value="ahmed">Ahmed</option>
+                <option value="mohamed">mohamed</option>
+                <select />
+        </div>
+        <button type="submit" class="btn btn-danger">Create</button>
+
+    </form>
+
+* (postController.php) -> controller
+
+*اول طريقة للتخزين ف الداتا بيز *
+
+class PostController extends Controller
+
+{ public function store(Request $request){   
+    
+	      $inputs = $request->all();
+	      Post::create($inputs);
+	      return redirect()->route('postsIndex');	
+
+					}}
+
+
+* ثانى طريقة للتخزين ف الداتا بيز *
+
+
+class PostController extends Controller
+{ public function store()
+    {
+        $Request = request()->all();
+        $Post = Post::create([
+            'title' => $Request['title'],
+            'description' => $Request['description'],
+            'Post_Creator' =>  $Request['Post_Creator'],
+        ]);
+
+        return redirect()->route('postsIndex');
+    }}
+------------------------------------------------------------------------------
+*طريقة عرض الداتا من الداتا بيز عشان تظهر ف الفيو *
+
+
+* (postController.php) -> controller
+
+class PostController extends Controller
+{ public function index()
+    {
+        $PostCollectionView = Post::all(); دى عشان لو عاوز اجيب الداتا كلها من الداتا بيز 
+        // $postCollection = Post::get('coloumn_name'); دى عشان لو عاوز اجيب عمود واحد من الداتا بيز مش الداتا كلها 
+        return view("posts.index", compact('PostCollectionView')); كده خدت المتغير دا معايا عشان بعد م ممسكت الداتا كلها وحطتها ف المتغير اروح اخد المتغير دا معايا عن طريق الكومباكت ميثود واروح للفيو 
+    }}
+
+*index.blade.php*  كده انا روحت للفيو عشان اعرض الداتا اللى انا جايبها من الداتا بيز عن طريق الكنترولربوست كونترولر  عن طريق الميثود انديكس
+     @foreach ($PostCollectionView as $posts)
+                <tr>
+                    <th scope="row">{{ $posts->id }}</th>
+                    <td>{{ $posts->title }} ودى طريقة العرض </td>
+                    <td>{{ $posts->description }} ودى طريقة العرض </td>
+                    <td>{{ $posts->Post_Creator }} ودى طريقة العرض </td>
+                    <td>{{ $posts->created_at }} ودى طريقة العرض </td>
+                    <td>{{ $posts->updated_at }} ودى طريقة العرض </td>
+                    <td>
+                        <div class="d-flex m-1">
+                            <a href='{{ route('show') }}'> <button type="button"
+                                    class="m-1 btn btn-primary">View</button></a>
+                            <button type="button" class="m-1 btn btn-primary">Edit</button>
+                            <button type="button" class="m-1 btn btn-danger">Delete</button>
+                        </div>
+                    </td>
+
+                </tr>
+            @endforeach
+
+
+
+
