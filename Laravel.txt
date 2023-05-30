@@ -1,4 +1,4 @@
-					   * how to creat new project in laravel *
+  					        * how to creat new project in laravel *
 
 * composer create-project laravel/laravel projectname
 ---------------------------------------------------------------------------------------------------------
