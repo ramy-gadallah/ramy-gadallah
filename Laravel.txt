@@ -11,7 +11,6 @@
 2- open vs code proggram- open termenal in vscode by " ctrl + ذ "- and write "php artisan ser (or) serve"    
 3- open browser -> write in url -> *(localhost/path of project/public)  or *(write localhost:8000)
 	or *(take link in terminal copy and put in url)
-4- eldapour
 ---------------------------------------------------------------------------------------------------------
 						  * عشان اعمل كريت يعنى اعمل انسيرت ف الداتا بيز ادخل داتا من فورم تسمع ف الداتا بيز *
  
